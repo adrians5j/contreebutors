@@ -1,0 +1,35 @@
+{
+  "name": "contreebutors",
+  "version": "0.0.0-development",
+  "description": "Checks if the dependencies in package.json and in the actual code are synced.",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doitadrian/contreebutors.git"
+  },
+  "author": "Adrian Smijulj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/doitadrian/contreebutors/issues"
+  },
+  "keywords": [
+    "contributors"
+  ],
+  "homepage": "https://github.com/doitadrian/contreebutors#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "bin": {
+    "contreebutors": "src/bin/contreebutors.js"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "jest",
+      "git add"
+    ]
+  }
+}
