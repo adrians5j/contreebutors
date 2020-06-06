@@ -1,7 +1,7 @@
 {
   "name": "contreebutors",
   "version": "0.0.0-development",
-  "description": "Checks if the dependencies in package.json and in the actual code are synced.",
+  "description": "🌳 A simple contributors list for your projects.",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
