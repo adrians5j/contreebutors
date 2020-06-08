@@ -3,5 +3,8 @@
     "parser": {
         "plugins": ["typescript"]
     },
-    "ignoreDirs": ["node_modules/", "dist/"]
+    "ignoreDirs": ["node_modules/", "dist/"],
+    "ignore": {
+        "devDependencies": true
+    }
 }
