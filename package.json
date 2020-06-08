@@ -22,7 +22,7 @@
         }
     },
     "bin": {
-        "contreebutors": "bin/contreebutors.js"
+        "contreebutors": "dist/bin/contreebutors.js"
     },
     "lint-staged": {
         "**/*.js": [
