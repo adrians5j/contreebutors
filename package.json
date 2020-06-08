@@ -1,35 +1,64 @@
 {
-  "name": "contreebutors",
-  "version": "0.0.0-development",
-  "description": "🌳 A simple contributors list for your projects.",
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/doitadrian/contreebutors.git"
-  },
-  "author": "Adrian Smijulj",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/doitadrian/contreebutors/issues"
-  },
-  "keywords": [
-    "contributors"
-  ],
-  "homepage": "https://github.com/doitadrian/contreebutors#readme",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "name": "contreebutors",
+    "version": "0.0.0-development",
+    "description": "🌳 A simple contributors list for your projects.",
+    "main": "dist/index.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/doitadrian/contreebutors.git"
+    },
+    "author": "Adrian Smijulj",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/doitadrian/contreebutors/issues"
+    },
+    "keywords": [
+        "contributors"
+    ],
+    "homepage": "https://github.com/doitadrian/contreebutors#readme",
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "bin": {
+        "contreebutors": "bin/contreebutors.js"
+    },
+    "lint-staged": {
+        "**/*.js": [
+            "prettier --write",
+            "eslint --fix",
+            "jest",
+            "git add"
+        ]
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.10.1",
+        "@babel/core": "^7.10.2",
+        "@babel/preset-env": "^7.10.2",
+        "@babel/preset-typescript": "^7.10.1",
+        "adio": "^1.1.1",
+        "babel-jest": "^26.0.1",
+        "husky": "^4.2.5",
+        "jest": "^26.0.1",
+        "lint-staged": "^10.2.9",
+        "prettier": "^2.0.5",
+        "rimraf": "^3.0.2",
+        "semantic-release": "^17.0.8",
+        "typescript": "^3.9.5"
+    },
+    "scripts": {
+        "test": "jest",
+        "build": "rimraf ./dist *.tsbuildinfo && babel src -d dist --source-maps --copy-files --extensions \".ts\"",
+        "watch": "babel src -d dist --source-maps --copy-files --extensions \".ts\" --watch",
+        "postbuild": "cp package.json LICENSE README.md dist/ && tsc -p tsconfig.json"
+    },
+    "dependencies": {
+        "chalk": "^4.0.0",
+        "got": "^11.3.0",
+        "load-json-file": "^6.2.0",
+        "lodash.chunk": "^4.2.0",
+        "write-json-file": "^4.3.0",
+        "yargs": "^15.3.1"
     }
-  },
-  "bin": {
-    "contreebutors": "src/bin/contreebutors.js"
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "prettier --write",
-      "eslint --fix",
-      "jest",
-      "git add"
-    ]
-  }
 }
