@@ -12,9 +12,9 @@ yargs.command({
             describe: "GitHub username"
         }
     },
-    handler: function(argv) {
+    handler: function(argv: { username: string }) {
         const contreebutors = new Contreebutors();
-        contreebutors.add(argv.user);
+        return contreebutors.add(argv);
     }
 });
 
