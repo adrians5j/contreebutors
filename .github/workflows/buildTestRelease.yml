@@ -39,3 +39,6 @@ jobs:
 
       - name: Set git username
         run: git config --global user.name "adrian@webiny.com"
+
+      - name: Release
+        ruseman: npx semantic-release
