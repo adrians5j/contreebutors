@@ -1,10 +1,18 @@
-import { Contreebutors } from "./../src";
+import { Contreebutors } from "..";
 import fs from "fs";
 import loadJsonFile from "load-json-file";
 import path from "path";
 import rimraf from "rimraf";
 
 const BLANK_PROJECT_DIR = path.join(__dirname, "blank-project");
+
+beforeEach(() => {
+    rimraf.sync(BLANK_PROJECT_DIR);
+});
+
+afterEach(() => {
+    rimraf.sync(BLANK_PROJECT_DIR);
+});
 
 test("must correctly generate the contreebutors.json file and add initial content into README.md", async () => {
     const contreebutors = new Contreebutors({ cwd: BLANK_PROJECT_DIR });
@@ -76,6 +84,4 @@ test("must correctly generate the contreebutors.json file and add initial conten
 <!-- prettier-ignore-end -->
 
 <!-- CONTREEBUTORS:END -->`);
-
-    rimraf.sync(BLANK_PROJECT_DIR);
 });
