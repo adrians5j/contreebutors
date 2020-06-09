@@ -1,6 +1,19 @@
 #! /usr/bin/env node
 import yargs from "yargs";
 import { Contreebutors } from "./..";
+import { red } from "chalk";
+
+const createHandler = callback => {
+    return async (...args) => {
+        try {
+            await callback(...args);
+            process.exit(0);
+        } catch (e) {
+            console.log(red(e.message));
+            process.exit(1);
+        }
+    };
+};
 
 yargs.command({
     command: "add",
@@ -12,10 +25,10 @@ yargs.command({
             describe: "GitHub username"
         }
     },
-    handler: function(argv: { username: string }) {
+    handler: createHandler(async function(argv: { username: string }) {
         const contreebutors = new Contreebutors();
-        return contreebutors.add(argv);
-    }
+        return await contreebutors.add(argv);
+    })
 });
 
 yargs.parse();
