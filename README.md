@@ -45,4 +45,5 @@ await contreebutors.add({ username: "doitadrian"});
 Again, this will only make the changes to the files. No Git commits will be performed.
 
 ## GitHub Action
+
 GitHub action is on the way. 😊
