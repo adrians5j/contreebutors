@@ -2,7 +2,7 @@ import got from "got";
 import ContributorsJsonFile, { ContributorsList } from "./files/ContributorsJsonFile";
 import path from "path";
 import RenderToFile from "./files/RenderToFile";
-import { red, green } from "chalk";
+import { ContreebutorsError } from "./ContreebutorsError";
 
 export type ContributorsRenderer = (contributorsList: ContributorsList) => string;
 
@@ -33,18 +33,23 @@ export class Contreebutors {
             });
             user = response.body;
         } catch (e) {
-            console.log(
-                red(
-                    `The following error occurred while trying to fetch data for user "${args.username}":`
-                )
-            );
-            console.log(red(e.message));
-            return;
+            throw new ContreebutorsError({
+                message: `The following error occurred while trying to fetch data for user "${args.username}": ${e.message}`
+            });
         }
 
         const contributorsListFile = new ContributorsJsonFile({
             path: path.join(this.config.cwd, this.config.contributorsListPath)
         });
+
+        await contributorsListFile.loadContributorsList();
+
+        if (contributorsListFile.isAdded(user)) {
+            throw new ContreebutorsError({
+                type: "warning",
+                message: `User "${user.username}" already added to the contributors list. Skipping...`
+            });
+        }
 
         await contributorsListFile.add({
             username: user.login,
@@ -58,8 +63,6 @@ export class Contreebutors {
         });
 
         await renderToFile.generate({ contributorsListFile, renderer: this.config.renderer });
-
-        console.log(green(`🌳 User "${args.username}" was successfully added to the contributors list.`))
     }
 
     async render() {
@@ -71,7 +74,8 @@ export class Contreebutors {
             path: path.join(this.config.cwd, this.config.contributorsListPath)
         });
 
+        await contributorsListFile.loadContributorsList();
+
         await renderToFile.generate({ contributorsListFile, renderer: this.config.renderer });
-        console.log(green(`🌳 The contributors list was successfully rendered.`))
     }
 }
