@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 import yargs from "yargs";
 import { Contreebutors } from "./..";
-import { red } from "chalk";
+import { red, green } from "chalk";
 
 const createHandler = callback => {
     return async (...args) => {
@@ -27,7 +27,10 @@ yargs.command({
     },
     handler: createHandler(async function(argv: { username: string }) {
         const contreebutors = new Contreebutors();
-        return contreebutors.add(argv);
+        await contreebutors.add(argv);
+        console.log(
+            green(`🌳 User "${argv.username}" was successfully added to the contributors list.`)
+        );
     })
 });
 
@@ -36,7 +39,8 @@ yargs.command({
     describe: "Renders the contributors list in specified file (README.md by default)",
     handler: createHandler(async function() {
         const contreebutors = new Contreebutors();
-        return contreebutors.render();
+        await contreebutors.render();
+        console.log(green(`🌳 The contributors list was successfully rendered.`));
     })
 });
 
