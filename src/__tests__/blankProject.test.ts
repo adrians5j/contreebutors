@@ -63,7 +63,7 @@ Thanks goes to these wonderful people:
                     <a href="https://github.com/doitadrian">
                         <img src="https://avatars0.githubusercontent.com/u/5121148?v=4" width="100px;" alt="Adrian Smijulj"/>
                         <br />
-                        <sub><b>Adrian2 Smijulj</b></sub>
+                        <sub><b>Adrian Smijulj</b></sub>
                     </a>
                     <br />
                 </td><td align="center">
