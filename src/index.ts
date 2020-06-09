@@ -2,6 +2,7 @@ import got from "got";
 import ContributorsJsonFile, { ContributorsList } from "./files/ContributorsJsonFile";
 import path from "path";
 import RenderToFile from "./files/RenderToFile";
+import { red } from "chalk";
 
 export type ContributorsRenderer = (contributorsList: ContributorsList) => string;
 
@@ -25,10 +26,21 @@ export class Contreebutors {
 
     async add(args: { username: string }) {
         let user;
-        const response = await got.get(`https://api.github.com/users/${args.username}`, {
-            responseType: "json"
-        });
-        user = response.body;
+
+        try {
+            const response = await got.get(`https://api.github.com/users/${args.username}`, {
+                responseType: "json"
+            });
+            user = response.body;
+        } catch (e) {
+            console.log(
+                red(
+                    `The following error occurred while trying to fetch data for user "${args.username}":`
+                )
+            );
+            console.log(red(e.message));
+            return;
+        }
 
         const contributorsListFile = new ContributorsJsonFile({
             path: path.join(this.config.cwd, this.config.contributorsListPath)
