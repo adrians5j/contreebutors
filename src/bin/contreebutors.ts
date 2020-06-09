@@ -17,7 +17,7 @@ const createHandler = callback => {
 
 yargs.command({
     command: "add",
-    describe: "Adds a new contributor to the contributors list.",
+    describe: "Adds a new contributor to the contributors list",
     builder: {
         username: {
             type: "string",
@@ -33,7 +33,7 @@ yargs.command({
 
 yargs.command({
     command: "render",
-    describe: "Renders the contributors list in specified file (README.md by default).",
+    describe: "Renders the contributors list in specified file (README.md by default)",
     handler: createHandler(async function() {
         const contreebutors = new Contreebutors();
         return contreebutors.render();
