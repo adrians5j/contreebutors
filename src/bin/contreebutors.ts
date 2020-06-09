@@ -27,7 +27,7 @@ yargs.command({
     },
     handler: createHandler(async function(argv: { username: string }) {
         const contreebutors = new Contreebutors();
-        return await contreebutors.add(argv);
+        return contreebutors.add(argv);
     })
 });
 
@@ -36,7 +36,7 @@ yargs.command({
     describe: "Renders the contributors list in specified file (README.md by default).",
     handler: createHandler(async function() {
         const contreebutors = new Contreebutors();
-        return await contreebutors.render();
+        return contreebutors.render();
     })
 });
 
