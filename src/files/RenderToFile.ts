@@ -2,7 +2,6 @@ import fs from "fs";
 import ContributorsJsonFile from "./ContributorsJsonFile";
 import { ContributorsRenderer } from "..";
 import render from "./RenderToFile/render";
-import { cyan } from "chalk";
 
 export type RenderToFileConfig = {
     path: string;
@@ -47,7 +46,7 @@ export default class RenderToFile {
     async generate({ contributorsListFile, renderer }: GenerateArgs) {
         await this.loadRenderTo();
 
-        const content = render(await contributorsListFile.loadContributorsList(), renderer);
+        const content = render(contributorsListFile.getContributorsList(), renderer);
         const regex = new RegExp(/<!-- CONTREEBUTORS:START.*<!-- CONTREEBUTORS:END -->/s);
         if (this.content.match(regex)) {
             this.content = this.content.replace(regex, content);
@@ -56,6 +55,5 @@ export default class RenderToFile {
         }
 
         await this.saveRenderTo();
-        console.log(cyan(`${this.config.path} file updated.`));
     }
 }

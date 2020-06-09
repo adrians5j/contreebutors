@@ -1,6 +1,6 @@
 import writeJsonFile from "write-json-file";
 import loadJsonFile from "load-json-file";
-import { cyan, yellow } from "chalk";
+
 export type ContributorsListContributor = {
     username: string;
     name: string;
@@ -50,15 +50,18 @@ export default class ContributorsJsonFile {
         return this.content;
     }
 
+    isAdded(user: ContributorsListContributor | string): boolean {
+        if (typeof user === "string") {
+            return Boolean(this.content.find(item => item.username === user));
+        }
+
+        return Boolean(this.content.find(item => item.username === user.username));
+    }
+
     async add(user: ContributorsListContributor) {
         await this.loadContributorsList();
 
-        const contributorAlreadyAdded = this.content.find(item => item.username === user.username);
-
-        if (contributorAlreadyAdded) {
-            console.log(
-                yellow(`Username "${user.username}" already added to the contributors list. Skipping...`)
-            );
+        if (this.isAdded(user)) {
             return;
         }
 
@@ -72,7 +75,5 @@ export default class ContributorsJsonFile {
         });
 
         await this.saveContributorsList();
-        console.log(cyan(`${this.config.path} file updated.`));
     }
-
 }
