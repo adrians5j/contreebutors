@@ -6,7 +6,7 @@ yargs.command({
     command: "add",
     describe: "Adds a new contributor to the contributors list.",
     builder: {
-        user: {
+        username: {
             type: "string",
             demandOption: true,
             describe: "GitHub username"
