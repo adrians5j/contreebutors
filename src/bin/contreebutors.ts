@@ -14,9 +14,14 @@ const createHandler = callback => {
                 process.exit(0);
             }
 
-            console.log(red(e.message));
-            const exitCode = args[0].noErrors ? 0 : 1;
-            process.exit(exitCode);
+            const { errors } = args[0];
+            if (errors) {
+                console.log(red(e.message));
+                process.exit(1);
+            }
+
+            console.log(yellow(e.message));
+            process.exit(0);
         }
     };
 };
@@ -30,9 +35,10 @@ yargs.command({
             demandOption: true,
             describe: "GitHub username"
         },
-        noErrors: {
+        errors: {
             type: "boolean",
-            describe: "Forces the process to finish with exit code 0"
+            describe: "If an error is thrown, the process will exit with exit code 1",
+            default: true
         }
     },
     handler: createHandler(async function(argv: { username: string }) {
@@ -48,9 +54,10 @@ yargs.command({
     command: "render",
     describe: "Renders the contributors list in specified file (README.md by default)",
     builder: {
-        noErrors: {
+        errors: {
             type: "boolean",
-            describe: "Forces the process to finish with exit code 0"
+            describe: "If an error is thrown, the process will exit with exit code 1",
+            default: true
         }
     },
     handler: createHandler(async function() {
