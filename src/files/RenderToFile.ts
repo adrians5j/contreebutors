@@ -47,7 +47,7 @@ export default class RenderToFile {
     async generate({ contributorsListFile, renderer }: GenerateArgs) {
         await this.loadRenderTo();
 
-        const content = render(contributorsListFile.getContributorsList(), renderer);
+        const content = render(await contributorsListFile.loadContributorsList(), renderer);
         const regex = new RegExp(/<!-- CONTREEBUTORS:START.*<!-- CONTREEBUTORS:END -->/s);
         if (this.content.match(regex)) {
             this.content = this.content.replace(regex, content);
