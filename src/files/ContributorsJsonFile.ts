@@ -1,6 +1,6 @@
 import writeJsonFile from "write-json-file";
 import loadJsonFile from "load-json-file";
-
+import { yellow } from "chalk";
 export type ContributorsListContributor = {
     username: string;
     name: string;
@@ -56,7 +56,10 @@ export default class ContributorsJsonFile {
         const contributorAlreadyAdded = this.content.find(item => item.username === user.username);
 
         if (contributorAlreadyAdded) {
-            throw Error(`Cannot add contributor ${user.username}. Already added to the list.`);
+            console.log(
+                yellow(`Username "${user.username}" already added to the contributors list. Skipping...`)
+            );
+            return;
         }
 
         const { username, name, profileUrl, avatarUrl } = user;
@@ -70,4 +73,5 @@ export default class ContributorsJsonFile {
 
         await this.saveContributorsList();
     }
+
 }
