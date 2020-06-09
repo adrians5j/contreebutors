@@ -2,7 +2,7 @@ import got from "got";
 import ContributorsJsonFile, { ContributorsList } from "./files/ContributorsJsonFile";
 import path from "path";
 import RenderToFile from "./files/RenderToFile";
-import { red } from "chalk";
+import { red, green } from "chalk";
 
 export type ContributorsRenderer = (contributorsList: ContributorsList) => string;
 
@@ -58,5 +58,7 @@ export class Contreebutors {
         });
 
         await renderToFile.generate({ contributorsListFile, renderer: this.config.renderer });
+
+        console.log(green(`🌳 User "${args.username}" was successfully added to the contributors list.`))
     }
 }
