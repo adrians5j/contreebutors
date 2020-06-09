@@ -19,10 +19,23 @@ Or if you prefer yarn:
 yarn add contreebutors --dev
 ```
 
-## Basic usage
+## CLI
 
-The following will create a `contreebutors.json` file in the current working directory, and render the list of contributors at the end of your README.md file:
+The following will create a `contreebutors.json` file in the current working directory, and render the list of contributors at the end of your `README.md` file:
 
-`contreebutors add --username doitadrian`
+```
+contreebutors add --username doitadrian
+```
 
+## Code
 
+You can also use the `Contreebutors` class and do things via code, which might be useful if you're trying to include the lib in your CI/CD pipeline.
+
+```ts
+import { Contreebutors } from "contreebutors";
+
+(...)
+
+const contreebutors = new Contreebutors();
+await contreebutors.add({ username: "doitadrian"});
+```
