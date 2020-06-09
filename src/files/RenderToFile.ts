@@ -2,6 +2,7 @@ import fs from "fs";
 import ContributorsJsonFile from "./ContributorsJsonFile";
 import { ContributorsRenderer } from "..";
 import render from "./RenderToFile/render";
+import { cyan } from "chalk";
 
 export type RenderToFileConfig = {
     path: string;
@@ -55,5 +56,6 @@ export default class RenderToFile {
         }
 
         await this.saveRenderTo();
+        console.log(cyan(`${this.config.path} file updated.`));
     }
 }

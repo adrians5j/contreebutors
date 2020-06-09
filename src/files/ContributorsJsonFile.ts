@@ -1,6 +1,6 @@
 import writeJsonFile from "write-json-file";
 import loadJsonFile from "load-json-file";
-import { yellow } from "chalk";
+import { cyan, yellow } from "chalk";
 export type ContributorsListContributor = {
     username: string;
     name: string;
@@ -72,6 +72,7 @@ export default class ContributorsJsonFile {
         });
 
         await this.saveContributorsList();
+        console.log(cyan(`${this.config.path} file updated.`));
     }
 
 }
