@@ -14,7 +14,9 @@ const Td = (contributor: ContributorsListContributor) => {
 };
 
 const defaultRenderer: ContributorsRenderer = contributorsList => {
-    return `## Thanks goes to these wonderful people:
+    return `## Contributors
+
+Thanks goes to these wonderful people:
 
 <table>
     ${chunk(contributorsList, 6)

@@ -27,7 +27,9 @@ test("must correctly generate the list of contributors", () => {
     expect(render(contributorsList)).toBe(`<!-- CONTREEBUTORS:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-## Thanks goes to these wonderful people:
+## Contributors
+
+Thanks goes to these wonderful people:
 
 <table>
     <tr><td align="center">
