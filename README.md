@@ -27,6 +27,8 @@ The following will create a `contreebutors.json` file in the current working dir
 contreebutors add --username doitadrian
 ```
 
+Note that the command doesn't perform any Git commits.
+
 ## Code
 
 You can also use the `Contreebutors` class and do things via code, which might be useful if you're trying to include the lib in your CI/CD pipeline.
@@ -39,3 +41,5 @@ import { Contreebutors } from "contreebutors";
 const contreebutors = new Contreebutors();
 await contreebutors.add({ username: "doitadrian"});
 ```
+
+Again, this will only make the changes to the files. No Git commits will be performed.
