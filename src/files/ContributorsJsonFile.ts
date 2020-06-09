@@ -1,5 +1,6 @@
 import writeJsonFile from "write-json-file";
 import loadJsonFile from "load-json-file";
+import { ContreebutorsError } from "../ContreebutorsError";
 
 export type ContributorsListContributor = {
     username: string;
@@ -25,7 +26,7 @@ export default class ContributorsJsonFile {
         this.mocks = null;
     }
 
-    async loadContributorsList() {
+    async load() {
         if (this.content) {
             return this.content;
         }
@@ -42,11 +43,16 @@ export default class ContributorsJsonFile {
         return this.content;
     }
 
-    saveContributorsList() {
+    async save() {
         return writeJsonFile(this.config.path, this.content);
     }
 
     getContributorsList() {
+        if (!this.content) {
+            throw new ContreebutorsError({
+                message: "Can access contributors list - file not loaded."
+            });
+        }
         return this.content;
     }
 
@@ -58,9 +64,7 @@ export default class ContributorsJsonFile {
         return Boolean(this.content.find(item => item.username === user.username));
     }
 
-    async add(user: ContributorsListContributor) {
-        await this.loadContributorsList();
-
+    add(user: ContributorsListContributor) {
         if (this.isAdded(user)) {
             return;
         }
@@ -74,6 +78,6 @@ export default class ContributorsJsonFile {
             addedOn: new Date()
         });
 
-        await this.saveContributorsList();
+        return this;
     }
 }

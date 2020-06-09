@@ -21,7 +21,7 @@ export default class RenderToFile {
         this.content = null;
     }
 
-    private loadRenderTo() {
+    load() {
         if (this.content !== null) {
             return this.content;
         }
@@ -35,7 +35,7 @@ export default class RenderToFile {
         return this.content;
     }
 
-    private saveRenderTo() {
+    save() {
         return fs.writeFileSync(this.config.path, this.content);
     }
 
@@ -43,9 +43,7 @@ export default class RenderToFile {
         return this.content;
     }
 
-    async generate({ contributorsListFile, renderer }: GenerateArgs) {
-        await this.loadRenderTo();
-
+    generate({ contributorsListFile, renderer }: GenerateArgs) {
         const content = render(contributorsListFile.getContributorsList(), renderer);
         const regex = new RegExp(/<!-- CONTREEBUTORS:START.*<!-- CONTREEBUTORS:END -->/s);
         if (this.content.match(regex)) {
@@ -54,6 +52,6 @@ export default class RenderToFile {
             this.content += `\n${content}`;
         }
 
-        await this.saveRenderTo();
+        return this;
     }
 }

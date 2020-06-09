@@ -25,6 +25,19 @@ export class Contreebutors {
     }
 
     async add(args: { username: string }) {
+        const contributorsListFile = new ContributorsJsonFile({
+            path: path.join(this.config.cwd, this.config.contributorsListPath)
+        });
+
+        await contributorsListFile.load();
+
+        if (contributorsListFile.isAdded(args.username)) {
+            throw new ContreebutorsError({
+                type: "warning",
+                message: `User "${args.username}" already added to the contributors list. Skipping...`
+            });
+        }
+
         let user;
 
         try {
@@ -32,50 +45,40 @@ export class Contreebutors {
                 responseType: "json"
             });
             user = response.body;
+            user = {
+                username: user.login,
+                name: user.name,
+                profileUrl: user.html_url,
+                avatarUrl: user.avatar_url
+            };
         } catch (e) {
             throw new ContreebutorsError({
                 message: `The following error occurred while trying to fetch data for user "${args.username}": ${e.message}`
             });
         }
 
-        const contributorsListFile = new ContributorsJsonFile({
-            path: path.join(this.config.cwd, this.config.contributorsListPath)
-        });
+        await contributorsListFile.add(user).save();
 
-        await contributorsListFile.loadContributorsList();
-
-        if (contributorsListFile.isAdded(user)) {
-            throw new ContreebutorsError({
-                type: "warning",
-                message: `User "${user.username}" already added to the contributors list. Skipping...`
-            });
-        }
-
-        await contributorsListFile.add({
-            username: user.login,
-            name: user.name,
-            profileUrl: user.html_url,
-            avatarUrl: user.avatar_url
-        });
-
-        const renderToFile = new RenderToFile({
-            path: path.join(this.config.cwd, this.config.renderToPath)
-        });
-
-        await renderToFile.generate({ contributorsListFile, renderer: this.config.renderer });
+        await this.render({ contributorsListFile });
     }
 
-    async render() {
+    async render(args: { contributorsListFile?: ContributorsJsonFile } = {}) {
         const renderToFile = new RenderToFile({
             path: path.join(this.config.cwd, this.config.renderToPath)
         });
 
-        const contributorsListFile = new ContributorsJsonFile({
-            path: path.join(this.config.cwd, this.config.contributorsListPath)
-        });
+        await renderToFile.load();
 
-        await contributorsListFile.loadContributorsList();
+        let contributorsListFile = args.contributorsListFile;
+        if (!contributorsListFile) {
+            contributorsListFile = new ContributorsJsonFile({
+                path: path.join(this.config.cwd, this.config.contributorsListPath)
+            });
+            await contributorsListFile.load();
+        }
 
-        await renderToFile.generate({ contributorsListFile, renderer: this.config.renderer });
+        await renderToFile
+            .generate({ contributorsListFile, renderer: this.config.renderer })
+            .save();
     }
 }
