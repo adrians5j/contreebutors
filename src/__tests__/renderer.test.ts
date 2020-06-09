@@ -1,30 +1,30 @@
 import render from "../files/RenderToFile/render";
+import { ContributorsList } from "../files/ContributorsJsonFile";
 
-const contributorsList = [
+const contributorsList: ContributorsList = [
     {
-        user: "doitadrian",
+        username: "doitadrian",
         name: "Adrian Smijulj",
         avatarUrl: "avatar1",
         profileUrl: "github.com/doitadrian"
     },
     {
-        login: "Pavel910",
+        username: "Pavel910",
         name: "Pavel Denisjuk",
         profileUrl: "github.com/pavel910",
-        avatarUrl: "avatar2",
-        avatar_url: "https://avatars1.githubusercontent.com/u/3920893?v=4"
+        avatarUrl: "avatar2"
     },
     {
-        login: "SvenAlHamad",
+        username: "SvenAlHamad",
         name: "Sven",
         profileUrl: "github.com/sven",
-        avatarUrl: "avatar3",
-        avatar_url: "https://avatars3.githubusercontent.com/u/3808420?v=4"
+        avatarUrl: "avatar3"
     }
 ];
 
 test("must correctly generate the list of contributors", () => {
-    expect(render(contributorsList)).toBe(`<!-- CONTREEBUTORS:START - Do not remove or modify this section -->
+    expect(render(contributorsList))
+        .toBe(`<!-- CONTREEBUTORS:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 ## Contributors
