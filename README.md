@@ -8,6 +8,7 @@
 [![](https://img.shields.io/npm/v/contreebutors.svg)](https://www.npmjs.com/package/contreebutors)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+![Build](https://github.com/doitadrian/contreebutors/workflows/Build/badge.svg)
 
 ## Install
 ```
