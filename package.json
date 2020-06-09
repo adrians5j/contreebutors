@@ -54,6 +54,7 @@
         "postbuild": "cp package.json LICENSE README.md dist/ && tsc -p tsconfig.json"
     },
     "dependencies": {
+        "chalk": "^4.0.0",
         "got": "^11.3.0",
         "load-json-file": "^6.2.0",
         "lodash.chunk": "^4.2.0",
