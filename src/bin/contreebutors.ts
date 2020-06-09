@@ -31,4 +31,13 @@ yargs.command({
     })
 });
 
+yargs.command({
+    command: "render",
+    describe: "Renders the contributors list in specified file (README.md by default).",
+    handler: createHandler(async function() {
+        const contreebutors = new Contreebutors();
+        return await contreebutors.render();
+    })
+});
+
 yargs.parse();

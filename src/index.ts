@@ -61,4 +61,17 @@ export class Contreebutors {
 
         console.log(green(`🌳 User "${args.username}" was successfully added to the contributors list.`))
     }
+
+    async render() {
+        const renderToFile = new RenderToFile({
+            path: path.join(this.config.cwd, this.config.renderToPath)
+        });
+
+        const contributorsListFile = new ContributorsJsonFile({
+            path: path.join(this.config.cwd, this.config.contributorsListPath)
+        });
+
+        await renderToFile.generate({ contributorsListFile, renderer: this.config.renderer });
+        console.log(green(`🌳 The contributors list was successfully rendered.`))
+    }
 }
