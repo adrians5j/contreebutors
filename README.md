@@ -12,6 +12,12 @@
 
 *Contreebutors* is a small library that makes it easy to keep a list of all people that contributed to a project (most often an open-source project). It's really easy to use - just run the `contreebutors add --username {GITHUB_USERNAME}` command and the tool will add the given contributor to the `contreebutors.json` file, and more importantly, update the list of all contributors at the end of your project's README.md file.
 
+<p align="center">
+  <img src="./docs/example.png" width="800">
+</p>
+
+Note: the list design can be tweaked to your liking.
+
 ## Install
 ```
 npm install contreebutors --save-dev
