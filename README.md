@@ -10,7 +10,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 ![Build](https://github.com/doitadrian/contreebutors/workflows/Build/badge.svg)
 
-Contreebutors is a small library that makes it easy to keep a list of all people that contributed to a project (most often an open-source project). It's really easy to use - just run the `contreebutors add --username {GITHUB_USERNAME}` command and the tool will add the given contributor to the `contreebutors.json` file, and more importantly, update the list of all contributors at the end of your project's README.md file.
+*Contreebutors* is a small library that makes it easy to keep a list of all people that contributed to a project (most often an open-source project). It's really easy to use - just run the `contreebutors add --username {GITHUB_USERNAME}` command and the tool will add the given contributor to the `contreebutors.json` file, and more importantly, update the list of all contributors at the end of your project's README.md file.
 
 ## Install
 ```
